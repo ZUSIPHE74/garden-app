@@ -52,6 +52,21 @@ climate_zone_tips = {
 
 
 
+southern_hemisphere_tips = {
+    1: "January: Summer harvest time! Pick tomatoes, corn, and berries. Water deeply.",
+    2: "February: Continue harvesting. Plant autumn vegetables. Mulch to retain moisture.",
+    3: "March: Autumn planting begins. Plant leafy greens and root vegetables.",
+    4: "April: Perfect time for planting trees and shrubs. Clean up summer crops.",
+    5: "May: Plant garlic and onions. Prepare garden for cooler months.",
+    6: "June: Winter planting - peas, broad beans, and brassicas. Protect from frost.",
+    7: "July: Prune deciduous trees. Plant bare-root roses and fruit trees.",
+    8: "August: Late winter - start seeds indoors. Plan spring vegetable garden.",
+    9: "September: Spring! Plant tomatoes, peppers, and summer vegetables.",
+    10: "October: Plant spring flowers. Watch for late frosts in some areas.",
+    11: "November: Regular watering as weather warms. Plant sweet corn and beans.",
+    12: "December: Summer begins - mulch well, water regularly, harvest early crops."
+}
+
 seasonal_tips = {
     "spring": "Spring: Time for planting! Prepare soil, start seeds, and enjoy the new growth.",
     "summer": "Summer: Focus on watering, mulching, and pest control. Harvest regularly.",
@@ -122,7 +137,7 @@ def get_gardening_advice(month=None, hemisphere="northern", climate_zone="temper
         "climate_tip": climate_tip
     }
 
-def get_gardening_advice(month=None, hemisphere="northern", climate_zone="temperate"):
+def get_gardening_advice(month=None, hemisphere="northern"):
     if month is None:
         month = get_current_month()
     
