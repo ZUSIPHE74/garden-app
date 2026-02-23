@@ -15,6 +15,22 @@ gardening_tips = {
     12: "December: Plan next year's garden. Feed birds and enjoy the winter landscape."
 }
 
+# ADD THIS - Southern Hemisphere specific tips
+southern_hemisphere_tips = {
+    1: "January: Summer harvest time! Pick tomatoes, corn, and berries. Water deeply.",
+    2: "February: Continue harvesting. Plant autumn vegetables. Mulch to retain moisture.",
+    3: "March: Autumn planting begins. Plant leafy greens and root vegetables.",
+    4: "April: Perfect time for planting trees and shrubs. Clean up summer crops.",
+    5: "May: Plant garlic and onions. Prepare garden for cooler months.",
+    6: "June: Winter planting - peas, broad beans, and brassicas. Protect from frost.",
+    7: "July: Prune deciduous trees. Plant bare-root roses and fruit trees.",
+    8: "August: Late winter - start seeds indoors. Plan spring vegetable garden.",
+    9: "September: Spring! Plant tomatoes, peppers, and summer vegetables.",
+    10: "October: Plant spring flowers. Watch for late frosts in some areas.",
+    11: "November: Regular watering as weather warms. Plant sweet corn and beans.",
+    12: "December: Summer begins - mulch well, water regularly, harvest early crops."
+}
+
 seasonal_tips = {
     "spring": "Spring: Time for planting! Prepare soil, start seeds, and enjoy the new growth.",
     "summer": "Summer: Focus on watering, mulching, and pest control. Harvest regularly.",
@@ -51,6 +67,7 @@ def get_season(month, hemisphere="northern"):
             return "spring"
     return "unknown"
 
+# UPDATE THIS FUNCTION - Add the hemisphere check
 def get_gardening_advice(month=None, hemisphere="northern"):
     if month is None:
         month = get_current_month()
@@ -61,7 +78,12 @@ def get_gardening_advice(month=None, hemisphere="northern"):
     season = get_season(month, hemisphere)
     month_name = get_month_name(month)
     
-    monthly_tip = gardening_tips.get(month, f"{month_name}: No specific tip available.")
+    # ADD THIS - Use appropriate tips based on hemisphere
+    if hemisphere.lower() == "southern":
+        monthly_tip = southern_hemisphere_tips.get(month, f"{month_name}: No specific tip available.")
+    else:
+        monthly_tip = gardening_tips.get(month, f"{month_name}: No specific tip available.")
+    
     seasonal_tip = seasonal_tips.get(season, f"Seasonal advice for {season} is not available.")
     
     return {
@@ -84,14 +106,14 @@ def print_gardening_advice(month=None, hemisphere="northern"):
     print("="*50)
     print(f"Hemisphere: {advice['hemisphere'].title()}")
     print(f"Season: {advice['season'].title()}")
-    print("\n Monthly Tip:")
+    print("\n📅 Monthly Tip:")
     print(f"   {advice['monthly_tip']}")
-    print("\nSeasonal Tip:")
+    print("\n🌱 Seasonal Tip:")
     print(f"   {advice['seasonal_tip']}")
     print("="*50 + "\n")
 
 if __name__ == "__main__":
-    print("Welcome to the Garden Advice App!")
+    print("Welcome to the Garden Advice App! 🌻")
     print("Get personalized gardening tips based on your location and time of year.")
     print_gardening_advice()
     print_gardening_advice(hemisphere="southern")
