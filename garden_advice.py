@@ -84,14 +84,14 @@ def print_gardening_advice(month=None, hemisphere="northern"):
     print("="*50)
     print(f"Hemisphere: {advice['hemisphere'].title()}")
     print(f"Season: {advice['season'].title()}")
-    print("\n Monthly Tip:")
+    print("\n📅 Monthly Tip:")
     print(f"   {advice['monthly_tip']}")
-    print("\nSeasonal Tip:")
+    print("\n🌱 Seasonal Tip:")
     print(f"   {advice['seasonal_tip']}")
     print("="*50 + "\n")
 
 if __name__ == "__main__":
-    print("Welcome to the Garden Advice App!")
+    print("Welcome to the Garden Advice App! 🌻")
     print("Get personalized gardening tips based on your location and time of year.")
     print_gardening_advice()
     print_gardening_advice(hemisphere="southern")
