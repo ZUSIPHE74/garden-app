@@ -14,6 +14,43 @@ gardening_tips = {
     11: "November: Protect plants from frost. Clean and store garden tools.",
     12: "December: Plan next year's garden. Feed birds and enjoy the winter landscape."
 }
+climate_zone_tips = {
+    "tropical": {
+        "general": "Tropical: Year-round growing season. Focus on pest management and rain protection.",
+        "wet_season": "Wet season: Plant root vegetables. Ensure good drainage.",
+        "dry_season": "Dry season: Focus on drought-tolerant plants. Mulch heavily."
+    },
+    "temperate": {
+        "general": "Temperate: Four distinct seasons. Follow seasonal planting guides.",
+        "spring": "Spring: Start seeds indoors. Plant cool-season crops.",
+        "summer": "Summer: Regular watering. Plant warm-season vegetables.",
+        "fall": "Fall: Harvest and preserve. Plant garlic and cover crops.",
+        "winter": "Winter: Plan garden. Maintain tools. Protect perennials."
+    },
+    "mediterranean": {
+        "general": "Mediterranean: Mild, wet winters and warm, dry summers. Focus on drought tolerance.",
+        "spring": "Spring: Plant warm-season crops. Conserve water.",
+        "summer": "Summer: Drought-tolerant plants. Deep watering. Shade protection.",
+        "fall": "Fall: Plant cool-season crops. Prepare for rains.",
+        "winter": "Winter: Plant natives. Improve soil with organic matter."
+    },
+    "arid": {
+        "general": "Arid: Low rainfall, extreme temperatures. Focus on water conservation.",
+        "spring": "Spring: Plant heat-tolerant varieties. Use shade cloth.",
+        "summer": "Summer: Water deeply but infrequently. Mulch heavily.",
+        "fall": "Fall: Second planting season. Prepare for cooler weather.",
+        "winter": "Winter: Plant cool-season crops. Protect from frost."
+    },
+    "cold": {
+        "general": "Cold: Short growing season. Focus on cold-hardy varieties.",
+        "spring": "Spring: Start seeds indoors. Wait until last frost to plant.",
+        "summer": "Summer: Quick-maturing varieties. Extend season with row covers.",
+        "fall": "Fall: Harvest before frost. Plant cold frames.",
+        "winter": "Winter: Plan next season. Start seeds indoors under lights."
+    }
+}
+
+
 
 seasonal_tips = {
     "spring": "Spring: Time for planting! Prepare soil, start seeds, and enjoy the new growth.",
@@ -51,29 +88,76 @@ def get_season(month, hemisphere="northern"):
             return "spring"
     return "unknown"
 
-def get_gardening_advice(month=None, hemisphere="northern"):
+def get_gardening_advice(month=None, hemisphere="northern", climate_zone="temperate"):
     if month is None:
         month = get_current_month()
     
     if month < 1 or month > 12:
         return {"error": "Invalid month. Please provide a month between 1 and 12."}
     
+    if climate_zone not in climate_zone_tips:
+        zones = ", ".join(climate_zone_tips.keys())
+        return {"error": f"Invalid climate zone. Choose from: {zones}"}
+    
     season = get_season(month, hemisphere)
     month_name = get_month_name(month)
     
-    monthly_tip = gardening_tips.get(month, f"{month_name}: No specific tip available.")
+    if hemisphere.lower() == "southern":
+        monthly_tip = southern_hemisphere_tips.get(month, f"{month_name}: No specific tip available.")
+    else:
+        monthly_tip = gardening_tips.get(month, f"{month_name}: No specific tip available.")
+    
     seasonal_tip = seasonal_tips.get(season, f"Seasonal advice for {season} is not available.")
+    
+    climate_tip = climate_zone_tips[climate_zone].get(season, 
+                     climate_zone_tips[climate_zone].get("general", "No climate tip available."))
     
     return {
         "month": month_name,
         "season": season,
         "hemisphere": hemisphere,
+        "climate_zone": climate_zone,
         "monthly_tip": monthly_tip,
-        "seasonal_tip": seasonal_tip
+        "seasonal_tip": seasonal_tip,
+        "climate_tip": climate_tip
     }
 
-def print_gardening_advice(month=None, hemisphere="northern"):
-    advice = get_gardening_advice(month, hemisphere)
+def get_gardening_advice(month=None, hemisphere="northern", climate_zone="temperate"):
+    if month is None:
+        month = get_current_month()
+    
+    if month < 1 or month > 12:
+        return {"error": "Invalid month. Please provide a month between 1 and 12."}
+    
+    if climate_zone not in climate_zone_tips:
+        zones = ", ".join(climate_zone_tips.keys())
+        return {"error": f"Invalid climate zone. Choose from: {zones}"}
+    
+    season = get_season(month, hemisphere)
+    month_name = get_month_name(month)
+    
+    if hemisphere.lower() == "southern":
+        monthly_tip = southern_hemisphere_tips.get(month, f"{month_name}: No specific tip available.")
+    else:
+        monthly_tip = gardening_tips.get(month, f"{month_name}: No specific tip available.")
+    
+    seasonal_tip = seasonal_tips.get(season, f"Seasonal advice for {season} is not available.")
+    
+    climate_tip = climate_zone_tips[climate_zone].get(season, 
+                     climate_zone_tips[climate_zone].get("general", "No climate tip available."))
+    
+    return {
+        "month": month_name,
+        "season": season,
+        "hemisphere": hemisphere,
+        "climate_zone": climate_zone,
+        "monthly_tip": monthly_tip,
+        "seasonal_tip": seasonal_tip,
+        "climate_tip": climate_tip
+    }
+
+def print_gardening_advice(month=None, hemisphere="northern", climate_zone="temperate"):
+    advice = get_gardening_advice(month, hemisphere, climate_zone)
     
     if "error" in advice:
         print(f"Error: {advice['error']}")
@@ -83,16 +167,32 @@ def print_gardening_advice(month=None, hemisphere="northern"):
     print(f"GARDENING ADVICE - {advice['month']}")
     print("="*50)
     print(f"Hemisphere: {advice['hemisphere'].title()}")
+    print(f"Climate Zone: {advice['climate_zone'].title()}")
     print(f"Season: {advice['season'].title()}")
     print("\n📅 Monthly Tip:")
     print(f"   {advice['monthly_tip']}")
     print("\n🌱 Seasonal Tip:")
     print(f"   {advice['seasonal_tip']}")
+    print("\n🌍 Climate Zone Tip:")
+    print(f"   {advice['climate_tip']}")
     print("="*50 + "\n")
 
-if __name__ == "__main__":
+    if __name__ == "__main__":
     print("Welcome to the Garden Advice App! 🌻")
     print("Get personalized gardening tips based on your location and time of year.")
+    
+    print("\n" + "="*50)
+    print("EXAMPLE 1: Northern Hemisphere, Temperate (default)")
     print_gardening_advice()
-    print_gardening_advice(hemisphere="southern")
-    print_gardening_advice(month=7, hemisphere="northern")
+    
+    print("\n" + "="*50)
+    print("EXAMPLE 2: Southern Hemisphere, Mediterranean")
+    print_gardening_advice(hemisphere="southern", climate_zone="mediterranean")
+    
+    print("\n" + "="*50)
+    print("EXAMPLE 3: Northern Hemisphere, Arid, July")
+    print_gardening_advice(month=7, hemisphere="northern", climate_zone="arid")
+    
+    print("\n" + "="*50)
+    print("EXAMPLE 4: Northern Hemisphere, Cold, January")
+    print_gardening_advice(month=1, hemisphere="northern", climate_zone="cold")
