@@ -4,6 +4,7 @@ import datetime
 # 2026-02-25: Removed duplicate get_gardening_advice definition.
 # 2026-02-25: Fixed __main__ block indentation so the script entrypoint is valid.
 # 2026-02-25: Replaced emoji output labels for Windows console compatibility.
+# 2026-02-25: Added southern hemisphere monthly tips.
 
 gardening_tips = {
     1: "January: Start planning your vegetable garden. Order seeds and prepare your soil.",
@@ -57,18 +58,18 @@ climate_zone_tips = {
 }
 
 southern_hemisphere_tips = {
-    1: "January: Summer harvest time! Pick tomatoes, corn, and berries. Water deeply.",
-    2: "February: Continue harvesting. Plant autumn vegetables. Mulch to retain moisture.",
-    3: "March: Autumn planting begins. Plant leafy greens and root vegetables.",
-    4: "April: Perfect time for planting trees and shrubs. Clean up summer crops.",
-    5: "May: Plant garlic and onions. Prepare garden for cooler months.",
-    6: "June: Winter planting - peas, broad beans, and brassicas. Protect from frost.",
-    7: "July: Prune deciduous trees. Plant bare-root roses and fruit trees.",
-    8: "August: Late winter - start seeds indoors. Plan spring vegetable garden.",
-    9: "September: Spring! Plant tomatoes, peppers, and summer vegetables.",
-    10: "October: Plant spring flowers. Watch for late frosts in some areas.",
-    11: "November: Regular watering as weather warms. Plant sweet corn and beans.",
-    12: "December: Summer begins - mulch well, water regularly, harvest early crops.",
+    1: "January: Peak summer care. Water deeply and harvest heat-loving crops.",
+    2: "February: Continue summer maintenance. Watch for sun stress and pests.",
+    3: "March: Begin autumn planting for cool-season vegetables.",
+    4: "April: Improve soil and plant autumn crops like brassicas.",
+    5: "May: Prepare for winter. Protect sensitive plants from cold snaps.",
+    6: "June: Midwinter care. Prune dormant plants and plan spring beds.",
+    7: "July: Continue winter maintenance. Start seeds indoors for spring.",
+    8: "August: Late winter prep. Feed soil and begin spring seedlings.",
+    9: "September: Early spring planting. Transplant seedlings outdoors.",
+    10: "October: Mid-spring growth. Mulch and monitor rapid growth.",
+    11: "November: Late spring planting. Stake and support tall crops.",
+    12: "December: Early summer harvests begin. Increase watering frequency.",
 }
 
 seasonal_tips = {
